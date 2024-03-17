@@ -42,7 +42,10 @@ userStore.fetch();
             <button class="btn btn-info btn-xs">
               <Icon name="uil:edit" />
             </button>
-            <button class="btn btn-error btn-xs">
+            <button
+              @click="userStore.delete(user.id)"
+              class="btn btn-error btn-xs"
+            >
               <Icon name="uil:trash-alt" />
             </button>
           </th>
