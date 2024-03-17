@@ -1,13 +1,15 @@
 <script setup lang="ts">
-const { data: users } = useFetch("/api/users");
+useSeoMeta({
+  titleTemplate: "%s | CRM",
+  ogTitle: "CRM - Nuxt app",
+  description: "This is customer relationship management system using Nuxt",
+  ogDescription: "This is customer relationship management system using Nuxt",
+  author: "Kei-K23",
+});
 </script>
+
 <template>
   <div>
-    <h1>hello</h1>
-    <ul>
-      <li v-for="user in users" :key="user.id">
-        {{ user.email }}
-      </li>
-    </ul>
+    <NuxtPage />
   </div>
 </template>
