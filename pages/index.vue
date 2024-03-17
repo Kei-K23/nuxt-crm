@@ -6,9 +6,5 @@ useHead({
 </script>
 
 <template>
-  <div>
-    <h1>
-      <Button>Hello</Button>
-    </h1>
-  </div>
+  <div></div>
 </template>

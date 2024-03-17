@@ -33,6 +33,7 @@
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@types/uuid": "^9.0.8",
     "drizzle-kit": "^0.20.14",
+    "nuxt-icon": "^0.6.9",
     "shadcn-nuxt": "^0.10.2",
     "typescript": "^5.4.2"
   }
