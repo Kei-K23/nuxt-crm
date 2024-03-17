@@ -7,6 +7,6 @@ useHead({
 
 <template>
   <div>
-    <button class="btn btn-success">Success</button>
+    <Table />
   </div>
 </template>
