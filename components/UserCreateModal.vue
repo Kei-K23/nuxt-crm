@@ -1,6 +1,8 @@
 <template>
   <!-- You can open the modal using ID.showModal() method -->
-  <button class="btn" onclick="my_modal_3.showModal()">open modal</button>
+  <button class="btn" onclick="my_modal_3.showModal()">
+    <Icon name="uil:user-plus" size="2rem" class="text-emerald-500" />
+  </button>
   <dialog id="my_modal_3" class="modal">
     <div class="modal-box">
       <form method="dialog">

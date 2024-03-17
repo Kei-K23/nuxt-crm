@@ -10,6 +10,7 @@ export const roles = sqliteTable('roles', {
 
 export const users = sqliteTable('users', {
     id: text('id').primaryKey(),
+    usernames: text('username'),
     email: text('email').unique().notNull(),
     phone: text('phone'),
     address: text('address'),

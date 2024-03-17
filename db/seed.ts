@@ -18,6 +18,7 @@ import { v4 as uuidv4 } from 'uuid';
         for (let i = 0; i < 10; i++) {
             usersData.push({
                 id: faker.string.uuid(),
+                usernames: faker.person.fullName(),
                 email: faker.internet.email(),
                 phone: faker.phone.number(),
                 address: faker.location.streetAddress(),
