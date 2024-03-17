@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { data: users } = useFetch("/api/users");
+const userStore = useUserStore();
+userStore.fetch();
 </script>
 <template>
   <div class="mt-4 mb-10 px-4 mx-auto overflow-x-auto w-full md:w-[80%]">
@@ -18,7 +19,7 @@ const { data: users } = useFetch("/api/users");
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
+        <tr v-for="user in userStore.users" :key="user.id">
           <th>
             <label>
               <input type="checkbox" class="checkbox" />
