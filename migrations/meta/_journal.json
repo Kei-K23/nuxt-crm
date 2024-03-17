@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1710655817134,
+      "tag": "0000_lazy_korvac",
+      "breakpoints": true
+    }
+  ]
+}
