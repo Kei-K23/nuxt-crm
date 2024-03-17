@@ -5,12 +5,15 @@
         <Icon name="uil:arrow-growth" size="2rem" class="text-emerald-500" />
         Nuxt - CRM</NuxtLink
       >
-      <NuxtLink to="https://github.com/Kei-K23" target="_blank" class="group">
-        <Icon name="uil:github" size="2rem" />
-        <span class="group-hover:text-emerald-500 transition-all">
-          Github
-        </span>
-      </NuxtLink>
+      <div class="flex items-center gap-4">
+        <UserCreateModal />
+        <NuxtLink to="https://github.com/Kei-K23" target="_blank" class="group">
+          <Icon name="uil:github" size="2rem" />
+          <span class="group-hover:text-emerald-500 transition-all">
+            Github
+          </span>
+        </NuxtLink>
+      </div>
     </nav>
   </header>
 </template>
