@@ -39,9 +39,7 @@ userStore.fetch();
           </th>
           <th class="flex items-center gap-x-2">
             <button class="btn btn-ghost btn-xs">details</button>
-            <button class="btn btn-info btn-xs">
-              <Icon name="uil:edit" />
-            </button>
+            <UserEditModal :user="user" />
             <button
               @click="userStore.delete(user.id)"
               class="btn btn-error btn-xs"

@@ -15,11 +15,11 @@ const btnRef = ref<HTMLButtonElement | null>(null);
 const userStore = useUserStore();
 const { data: roles } = useFetch("/api/roles");
 
-function onSubmit() {
+async function onSubmit() {
   const id = uuid4().toString();
   user.value.id = id;
   // request to the server
-  const { data, status } = useFetch("/api/users", {
+  const { data, status } = await useFetch("/api/users", {
     method: "post",
     body: JSON.stringify(user.value),
     headers: {
@@ -32,6 +32,14 @@ function onSubmit() {
       // refetch the user data
       userStore.fetch();
       btnRef.value?.click();
+      user.value = {
+        id: "",
+        username: "",
+        email: "",
+        phone: "",
+        address: "",
+        roleId: "",
+      };
     }
   }
 }

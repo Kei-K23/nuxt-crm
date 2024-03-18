@@ -14,7 +14,7 @@
           </button>
         </form>
         <h3 class="font-bold text-lg">Create new user</h3>
-        <Form />
+        <CreateForm />
       </div>
       <form method="dialog" class="modal-backdrop">
         <button>close</button>
