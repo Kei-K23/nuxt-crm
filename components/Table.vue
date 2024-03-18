@@ -15,8 +15,10 @@ const bulkDelete = async () => {
 
 const bulkBan = async () => {
   await userStore.bulkUpdate(banUserArray.value);
-  banUserArray.value = [];
-  checkRef.value = null;
+  banUserArray.value = banUserArray.value.map((bu) => ({
+    ...bu,
+    isBanned: !bu.isBanned,
+  }));
 };
 
 const onChange = () => {
@@ -29,17 +31,15 @@ const onChange = () => {
   } else {
     deleteUserArray.value = [];
   }
-  console.log(banUserArray.value);
 };
 
 const onBanUserAdd = (u: InsertUser) => {
-  const isBanned = banUserArray.value.every((b) => b.id === u.id);
+  const isBanned = banUserArray.value.some((b) => b.id === u.id);
   if (isBanned) {
     banUserArray.value = banUserArray.value.filter((b) => b.id !== u.id);
   } else {
     banUserArray.value.push({ id: u.id, isBanned: u.isBanned! });
   }
-  console.log(banUserArray);
 };
 </script>
 <template>
