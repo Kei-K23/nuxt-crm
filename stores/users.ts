@@ -11,10 +11,14 @@ export const useUserStore = defineStore('userStore', {
         },
         async delete(id: string) {
             try {
-                await $fetch(`/api/users/${id}`, {
+                const data = await $fetch(`/api/users/${id}`, {
                     method: "delete"
                 })
-                await this.fetch()
+                if (data) {
+                    if (data.success) {
+                        await this.fetch()
+                    }
+                }
             } catch (error) {
                 console.error(error);
             }

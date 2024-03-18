@@ -3,8 +3,11 @@ import { users } from "~/db/schema"
 
 export default defineEventHandler(async (event) => {
     const user = await readBody(event)
-    await db.insert(users).values(user)
+    const createdUser = await db.insert(users).values(user).returning()
     setResponseHeader(event, "Content-Type", "application/json")
     setResponseStatus(event, 201)
-    return user
+    return {
+        success: true,
+        user: createdUser,
+    }
 })

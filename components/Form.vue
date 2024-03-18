@@ -19,17 +19,20 @@ function onSubmit() {
   const id = uuid4().toString();
   user.value.id = id;
   // request to the server
-  const { data } = useFetch("/api/users", {
+  const { data, status } = useFetch("/api/users", {
     method: "post",
     body: JSON.stringify(user.value),
     headers: {
       "Content-Type": "application/json",
     },
   });
+
   if (data) {
-    // refetch the user data
-    userStore.fetch();
-    btnRef.value?.click();
+    if (data.value?.success) {
+      // refetch the user data
+      userStore.fetch();
+      btnRef.value?.click();
+    }
   }
 }
 </script>
