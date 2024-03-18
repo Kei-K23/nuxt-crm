@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { v4 as uuid4 } from "uuid";
 import type { InsertUser } from "~/db/schema";
 
 const props = defineProps({
@@ -17,30 +16,20 @@ const userStore = useUserStore();
 const { data: roles } = useFetch("/api/roles");
 
 async function onSubmit() {
-  const id = uuid4().toString();
-  user.value.id = id;
-  // request to the server
-  const { data, status } = await useFetch("/api/users", {
-    method: "post",
-    body: JSON.stringify(user.value),
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const data = await userStore.update(user.value.id, {
+    username: user.value.username,
+    email: user.value.email,
+    roleId: user.value.roleId,
+    phone: user.value.phone,
+    address: user.value.address,
   });
 
   if (data) {
-    if (data.value?.success) {
+    if (data.success) {
       // refetch the user data
       userStore.fetch();
       btnRef.value?.click();
-      user.value = {
-        id: "",
-        username: "",
-        email: "",
-        phone: "",
-        address: "",
-        roleId: "",
-      };
+      user.value = data.user[0];
     }
   }
 }

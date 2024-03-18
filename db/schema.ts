@@ -21,4 +21,6 @@ export const users = sqliteTable('users', {
 
 export type InsertUser = typeof users.$inferInsert;
 
+export type UpdateUser = Omit<typeof users.$inferInsert, 'id' | 'updatedAt' | "createdAt">;
+
 export type InsertRole = typeof roles.$inferInsert;
