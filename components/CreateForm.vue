@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { v4 as uuid4 } from "uuid";
 
+const router = useRouter();
 const user = ref({
   id: "",
   username: "",
@@ -40,6 +41,7 @@ async function onSubmit() {
         address: "",
         roleId: "",
       };
+      router.push(`/users/${data.value.user[0].id}`);
     }
   }
 }

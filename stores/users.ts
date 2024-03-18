@@ -6,8 +6,8 @@ export const useUserStore = defineStore('userStore', {
     }),
     actions: {
         async fetch() {
-            const users = await $fetch('/api/users')
-            this.users = users
+            const { data: users } = await useFetch('/api/users')
+            this.users = users.value!
         },
         async fetchUser(id: string) {
             const data = await $fetch(`/api/users/${id}`, {
@@ -23,6 +23,22 @@ export const useUserStore = defineStore('userStore', {
                 if (data) {
                     if (data.success) {
                         await this.fetch()
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        async bulkDelete(usersArray: Array<string>) {
+            try {
+                const data = await $fetch(`/api/users/`, {
+                    method: "delete",
+                    body: JSON.stringify(usersArray)
+                })
+                if (data) {
+                    if (data.success) {
+                        await this.fetch()
+                        return true
                     }
                 }
             } catch (error) {

@@ -1,15 +1,43 @@
 <script setup lang="ts">
+const deleteUserArray = ref<Array<string>>([]);
+const checkRef = ref<HTMLInputElement | null>(null);
 const userStore = useUserStore();
-userStore.fetch();
+await userStore.fetch();
+
+const bulkDelete = async () => {
+  await userStore.bulkDelete(deleteUserArray.value);
+  deleteUserArray.value = [];
+  checkRef.value = null;
+};
+
+const onChange = () => {
+  if (checkRef.value?.checked) {
+    deleteUserArray.value = userStore.users.map((u) => u.id);
+  } else {
+    deleteUserArray.value = [];
+  }
+};
 </script>
 <template>
   <div class="mt-4 mb-10 px-4 mx-auto overflow-x-auto w-full md:w-[80%]">
+    <button
+      @click="bulkDelete"
+      :disabled="deleteUserArray.length <= 0"
+      class="btn btn-error btn-sm mb-2"
+    >
+      Delete All
+    </button>
     <table class="table">
       <thead>
         <tr>
           <th>
             <label>
-              <input type="checkbox" class="checkbox" />
+              <input
+                ref="checkRef"
+                @change="onChange"
+                type="checkbox"
+                class="checkbox"
+              />
             </label>
           </th>
           <th>Username</th>
@@ -22,7 +50,12 @@ userStore.fetch();
         <tr v-for="user in userStore.users" :key="user.id">
           <th>
             <label>
-              <input type="checkbox" class="checkbox" />
+              <input
+                type="checkbox"
+                :value="user.id"
+                v-model="deleteUserArray"
+                class="checkbox"
+              />
             </label>
           </th>
           <th>
