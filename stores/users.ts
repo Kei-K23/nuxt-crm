@@ -61,6 +61,22 @@ export const useUserStore = defineStore('userStore', {
             } catch (error) {
                 console.error(error);
             }
+        },
+        async bulkUpdate(usersArray: Array<{ id: string; isBanned: boolean }>) {
+            try {
+                const data = await $fetch(`/api/users/`, {
+                    method: "put",
+                    body: JSON.stringify(usersArray)
+                })
+                if (data) {
+                    if (data.success) {
+                        await this.fetch()
+                        return data
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 })

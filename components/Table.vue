@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import type { InsertUser } from "~/db/schema";
+
 const deleteUserArray = ref<Array<string>>([]);
+const banUserArray = ref<Array<{ id: string; isBanned: boolean }>>([]);
 const checkRef = ref<HTMLInputElement | null>(null);
 const userStore = useUserStore();
 await userStore.fetch();
@@ -10,23 +13,53 @@ const bulkDelete = async () => {
   checkRef.value = null;
 };
 
+const bulkBan = async () => {
+  await userStore.bulkUpdate(banUserArray.value);
+  banUserArray.value = [];
+  checkRef.value = null;
+};
+
 const onChange = () => {
   if (checkRef.value?.checked) {
     deleteUserArray.value = userStore.users.map((u) => u.id);
+    banUserArray.value = userStore.users.map((u) => ({
+      id: u.id,
+      isBanned: u.isBanned!,
+    }));
   } else {
     deleteUserArray.value = [];
   }
+  console.log(banUserArray.value);
+};
+
+const onBanUserAdd = (u: InsertUser) => {
+  const isBanned = banUserArray.value.every((b) => b.id === u.id);
+  if (isBanned) {
+    banUserArray.value = banUserArray.value.filter((b) => b.id !== u.id);
+  } else {
+    banUserArray.value.push({ id: u.id, isBanned: u.isBanned! });
+  }
+  console.log(banUserArray);
 };
 </script>
 <template>
   <div class="mt-4 mb-10 px-4 mx-auto overflow-x-auto w-full md:w-[80%]">
-    <button
-      @click="bulkDelete"
-      :disabled="deleteUserArray.length <= 0"
-      class="btn btn-error btn-sm mb-2"
-    >
-      Delete All
-    </button>
+    <div class="mb-2 flex items-center gap-3">
+      <button
+        @click="bulkDelete"
+        :disabled="deleteUserArray.length <= 0"
+        class="btn btn-error btn-sm"
+      >
+        Delete All
+      </button>
+      <button
+        @click="bulkBan"
+        :disabled="deleteUserArray.length <= 0"
+        class="btn btn-warning btn-sm"
+      >
+        Ban All
+      </button>
+    </div>
     <table class="table">
       <thead>
         <tr>
@@ -51,6 +84,7 @@ const onChange = () => {
           <th>
             <label>
               <input
+                @change="onBanUserAdd(user)"
                 type="checkbox"
                 :value="user.id"
                 v-model="deleteUserArray"
@@ -59,7 +93,9 @@ const onChange = () => {
             </label>
           </th>
           <th>
-            <div class="font-bold">{{ user.username }}</div>
+            <div class="font-bold" :class="user.isBanned && 'text-yellow-500'">
+              {{ user.username }}
+            </div>
           </th>
           <th>
             <div class="font-bold">{{ user.email }}</div>
