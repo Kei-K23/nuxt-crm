@@ -1,13 +1,19 @@
 import { type InsertUser, type UpdateUser } from "~/db/schema"
 
 export const useUserStore = defineStore('userStore', {
-    state: (): { users: InsertUser[] } => ({
-        users: []
+    state: (): { users: InsertUser[], user?: InsertUser } => ({
+        users: [],
     }),
     actions: {
         async fetch() {
             const users = await $fetch('/api/users')
             this.users = users
+        },
+        async fetchUser(id: string) {
+            const data = await $fetch(`/api/users/${id}`, {
+                method: 'get'
+            })
+            this.user = data.user[0]
         },
         async delete(id: string) {
             try {

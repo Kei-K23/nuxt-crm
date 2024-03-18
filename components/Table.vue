@@ -38,7 +38,9 @@ userStore.fetch();
             <div class="font-bold">{{ user.address }}</div>
           </th>
           <th class="flex items-center gap-x-2">
-            <button class="btn btn-ghost btn-xs">details</button>
+            <NuxtLink :to="'/users/' + user.id">
+              <button class="btn btn-ghost btn-xs">details</button>
+            </NuxtLink>
             <UserEditModal :user="user" />
             <button
               @click="userStore.delete(user.id)"
