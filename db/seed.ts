@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
             role: "user"
         })
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 20; i++) {
             usersData.push({
                 id: faker.string.uuid(),
                 username: faker.person.fullName(),

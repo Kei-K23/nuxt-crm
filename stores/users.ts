@@ -1,4 +1,4 @@
-import { type InsertUser, type UpdateUser } from "~/db/schema"
+import { type BanUser, type InsertUser, type UpdateUser } from "~/db/schema"
 
 export const useUserStore = defineStore('userStore', {
     state: (): { users: InsertUser[], user?: InsertUser } => ({
@@ -45,7 +45,7 @@ export const useUserStore = defineStore('userStore', {
                 console.error(error);
             }
         },
-        async update(id: string, user: UpdateUser) {
+        async update(id: string, user: UpdateUser | BanUser) {
             try {
                 const data = await $fetch(`/api/users/${id}`, {
                     method: "put",
@@ -54,6 +54,7 @@ export const useUserStore = defineStore('userStore', {
                 if (data) {
                     if (data.success) {
                         await this.fetch()
+                        await this.fetchUser(id)
                         return data
                     }
                 }
