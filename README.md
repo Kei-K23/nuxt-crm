@@ -1,75 +1,55 @@
-# Nuxt 3 Minimal Starter
+# Nuxt CRM
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is a simple CRM application that can perform CRUD operations and users banning system.
 
-## Setup
+## Features
 
-Make sure to install the dependencies:
+- CRUD.
+- Bulk deletion and banning for users.
+
+## Tech stack
+
+- **Nuxt 3**
+- **Turso**
+- **Drizzle**
+- **DasiyUI**
+
+## Usage
+
+1. Clone this repository to your local machine.
 
 ```bash
-# npm
+git clone https://github.com/Kei-K23/nuxt-crm.git
+```
+
+2. Navigate to the project directory.
+
+```bash
+cd vue-todo-app
+```
+
+3. Install dependencies using npm or yarn.
+
+```bash
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+4. Run the development server.
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## How to Use
 
-Build the application for production:
+- `Create`: Click user plus icon button in the navbar to open modal to create new user.
+- `Update`: Click pen icon button to open modal and edit the user.
+- `Delete`: Click trash icon button to delete the user.
+- `Detail`: Click detail button that navigate to the user detail page.
+- `Ban`: Click ban button in the user detail page to ban the user.
+- `Delete all`: Check the input box and click delete all button to perform bulk delete.
+- `Ban all`: Check the input box and click ban all button to perform bulk ban.
 
-```bash
-# npm
-npm run build
+Feel free to customize and extend this Vue todo application according to your needs. If you have any questions or suggestions, please feel free to reach out. Happy coding! 🚀
 
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Live demo [Nuxt CRM](https://nuxt-crm-sigma.vercel.app/)
